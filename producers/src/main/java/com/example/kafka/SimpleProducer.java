@@ -23,16 +23,16 @@ public class SimpleProducer {
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // KafkaProducer object creation
-        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(props);
+        try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(props)) {
 
-        // ProducerRecord object creation
-        ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, "hello world2");
+            // ProducerRecord object creation
+            ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, "hello world2");
 
-        // KafkaProducer message send
-        kafkaProducer.send(producerRecord);
+            // KafkaProducer message send
+            kafkaProducer.send(producerRecord);
 
-        kafkaProducer.flush();
-        kafkaProducer.close();
+            kafkaProducer.flush();
+        }
     }
 
 }
