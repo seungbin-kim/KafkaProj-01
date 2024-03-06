@@ -29,6 +29,13 @@ public class PizzaProducer {
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+        // acks setting
+        //props.setProperty(ProducerConfig.ACKS_CONFIG, "0");
+
+        // batch setting
+        props.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "32000");
+        props.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
+
         // KafkaProducer object creation
         try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(props)) {
 
@@ -36,8 +43,8 @@ public class PizzaProducer {
                     -1,
                     100,
                     100,
-                    10,
-                    true);
+                    100,
+                    false);
         }
     }
 
@@ -89,6 +96,8 @@ public class PizzaProducer {
 
         // 비동기 전송
         if (!sync) {
+            // send() 메서드는 Record Accumulator 에 레코드 적재후 바로 반환됨.
+            // 본질적으로 비동기 이다.
             kafkaProducer.send(producerRecord, (metadata, exception) -> {
                 if (exception == null) {
                     logger.info("async message:{}, partition:{}, offset:{}",
