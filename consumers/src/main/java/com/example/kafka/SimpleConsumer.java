@@ -27,6 +27,8 @@ public class SimpleConsumer {
         props.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         props.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "group_01");
 
+        props.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
         try (KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<>(props)) {
             kafkaConsumer.subscribe(List.of(topicName));
 
@@ -37,8 +39,8 @@ public class SimpleConsumer {
 
                 for (ConsumerRecord<String, String> record : records) {
 
-                    logger.info("record key:{}, record value:{}, partition:{}",
-                            record.key(), record.value(), record.partition());
+                    logger.info("record key:{}, record value:{}, partition:{}, record offset:{}",
+                            record.key(), record.value(), record.partition(), record.offset());
                 }
             }
 
