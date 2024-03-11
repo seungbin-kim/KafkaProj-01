@@ -19,7 +19,7 @@ public class ConsumerWakeup {
 
     public static void main(String[] args) {
 
-        String topicName = "simple-topic";
+        String topicName = "pizza-topic";
 
         // 기본적인 설정
         Properties props = new Properties();
@@ -53,8 +53,8 @@ public class ConsumerWakeup {
 
                 for (ConsumerRecord<String, String> record : records) {
 
-                    logger.info("record key:{}, record value:{}, partition:{}",
-                            record.key(), record.value(), record.partition());
+                    logger.info("record key:{}, partition:{}, record offset:{}, record value:{}",
+                            record.key(), record.partition(), record.offset(), record.value());
                 }
             }
         } catch (WakeupException e) {
