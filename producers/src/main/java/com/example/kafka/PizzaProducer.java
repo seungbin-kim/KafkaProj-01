@@ -47,9 +47,9 @@ public class PizzaProducer {
 
             sendPizzaMessage(kafkaProducer,
                     -1,
-                    500,
+                    1000,
                     100,
-                    100,
+                    3000,
                     false);
         }
     }
