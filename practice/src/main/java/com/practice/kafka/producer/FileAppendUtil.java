@@ -49,10 +49,8 @@ public class FileAppendUtil {
         String address = faker.address().streetAddress();
         LocalDateTime now = LocalDateTime.now();
 
-        String message = String.format(
-                "order_id:%s, shop:%s, pizza_name:%s, customer_name:%s, phone_number:%s, address:%s, time:%s"
-                , ordId, shopId, pizzaName, customerName, phoneNumber, address
-                , now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.KOREAN)));
+        String message = String.format("%s, %s, %s, %s, %s, %s, %s",
+                ordId, shopId, pizzaName, customerName, phoneNumber, address, now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.KOREAN)));
 
         HashMap<String, String> messageMap = new HashMap<>();
         messageMap.put("key", shopId);
