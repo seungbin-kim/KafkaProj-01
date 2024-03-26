@@ -17,7 +17,7 @@ public class PizzaProducer {
 
     private static final Logger logger = LoggerFactory.getLogger(PizzaProducer.class);
 
-    private static final String TOPIC_NAME = "pizza-topic";
+    private static final String TOPIC_NAME = "pizza-topic-p3r3";
 
     public static void main(String[] args) {
 
@@ -25,7 +25,8 @@ public class PizzaProducer {
         Properties props = new Properties();
 
         // bootstrap.servers, key.serializer.class, value.serializer.class
-        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+//        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092, localhost:9093, localhost:9094");
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
